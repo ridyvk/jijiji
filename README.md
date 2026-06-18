@@ -2,6 +2,8 @@
 
 A clean animated weather PWA with light-driven visuals. `sora` uses Open-Meteo data, refreshes automatically, and changes the background palette based on the selected area's weather.
 
+Live site: https://ridyvk.github.io/jijiji/
+
 - Current weather, humidity, wind, pressure, precipitation, UV, and AQI
 - Hourly and 7-day forecasts
 - Location search and current-location support
