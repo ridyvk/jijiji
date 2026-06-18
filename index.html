@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="sora" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="icon" type="image/webp" href="data:image/webp;base64,UklGRh4FAABXRUJQVlA4IBIFAACQKwCdASrAAMAAPnk8mkmko6IoorapsRAPCWVudFrdbEF5lpecB/d5JgxHGPjsOTCbJBwejHbHZ6qX2FQb89sGlQOTItA4GAEHZUXRPBxzuDGQpodLdxEgPLFc//8el8LOecWtmPgdSEJ75LOceWpRaMlT2GV16aS9ZixjT7MkKDTrMyL03zlhnK2u7PMhBaltieFBeG/ADxZy4Q2aVjnWlKUcsfAQyKez2P/XtK+R9c6cJ20lcIDwy2JLoi+ueq5iVeDVNdXKO9p7wy5lZfvd16neBAX24y4iHN3Nig5wdz90zsdaVRTPeB19XkqrTFIWdBbYPZoieQnuw0zkOmCQmmjbDGdZGhpC4TOc6PVuMIEeXyDFjDaJFkIZhb762b+/dC0mvdXd3Y7quWXR6fy4iMwNUX1JbmkPpJWRNsYNVLJpYkBJ7GF542SsEonfrTx9CqfXKUvF5pgWyvg0YhHv8dcE8AAA/vtvgHQV5KgMCPeZM9pllwGvHhavosPC3CuWFfJXvRJvgAh4rYCdZaEQm/pJLh9llgwIWLyRwwLPqjbOpR3vC3N4rSeaxtV0epKvH0Iuibwr89MSX7TnJaDXIXeRmCEyEa8JtzMgyGYGiIexcUm/rE/5pQ/I7Vo6qDJY423oBtq8GbR2UwuL5Fjpgm2IulQAHRNkLe82nIGK5DpGUB2D82+6Y9Q3IbyaKMQqLLk1p1HkscvmJ2gktcZPW3vARw3BpFjqwcQDyzDtEBQVpgb1O7w7qMDUn2Akp/9VIvmJgML9NtXmdiyCKm+XQNGgI0Nq8CRnBW3Yb6XMdJFCdMbXRUQk99rGMBnT/dtS7u25hGGbe2QrWw270haXG4x288cJtI5It7B3nVJ8YVMb99IlWmM38SunCmP5OPAU0dC0wSUTVBeLjZk+ZTRfuh8xP3/nnlz3a7zgM36wmZ+XcFSqO1KWKQ0UJsEp1nJCY9ZDpxeP0AgW/GoEMHGBxfR0T89oRgqxcCTdwVvR/2C36pts6HtA34cjgT5EyKOzkUHx+8edBIZM7fEMS4/KM1soXD+JijnvHud6VZLKEMWL2ttUxQDzH2zKouSfTMCCIF9l8nE1IhdLMvF2s0Yh2A29WQF0QJFE+TAdKK8nR3FoJjm8LCtPir3LugR9cPoAkIvriSSe3Wwl/z30uPaTNjav4cviCmJo+k7pLIYVwtF1DNwNhi8u7/HRiqEeCgxpTFNKb8dvUIuw4pgOmxDtx1whjEw78u8DqMojKwOIwZCyyCrZ3xyZTZJiMlXR7EWZzh7R726NojTUbLg5j4XVjln4A5gaSnzZUQVij1DWtdWZIHpZlNLVxp8p05WV8cpVlzTxhOaugC6sSs9EKNebtwYNDmzV9f9SG6Ywi5PKHA8yKq2VZx9JI+Qr/OLjhGnMX5Dlne7dF1Ih7Z6kiCVuwDCN8XQ6R2IBEhd6Drziwai6HvYa9zzzKpDghCMvAy1vmXaDd0buopoDFWcAgdbqLcETW9NZu7626wz7wh7Su1j8caXvCgrM9c3qCtnKzPk1bq5f1oi8YquiCIMC5rbs/4FdFI4htDHIEJjEHr0v2C61t6lK6dTEVTmOjsxvYiXJc3UHOiHK++bgqkcybwK0mOuaK6hOqTJ3RIqqAI4+29NrUa00zyL/hGsdCRRbldvBwLh3tiShjsW1F7D1TYAFSe9vQj+c82XsRdugakkKr6JiZh8LSj9DolCDO03eEcAAAA==" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ecfeff'/%3E%3Ccircle cx='36' cy='24' r='12' fill='%23f7c96b'/%3E%3Cpath d='M18 41c7-12 21-12 28 0' fill='none' stroke='%2324c8e8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
     <title>sora</title>
     <style>
       :root {
@@ -25,6 +25,7 @@
         --accent2: #7cdcff;
         --glow: rgba(62, 218, 240, 0.46);
         --shadow: rgba(39, 92, 119, 0.16);
+        --serif-ja: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Noto Serif JP", "Source Han Serif JP", "Times New Roman", serif;
       }
       * { box-sizing: border-box; }
       body {
@@ -56,7 +57,7 @@
       @keyframes slide { to { background-position: 380px 0; } }
       header { display:flex; align-items:center; gap:16px; justify-content:space-between; padding:10px 0 22px; }
       .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; min-width: 0; }
-      .brand img { width:44px; height:44px; border-radius:14px; box-shadow:0 12px 30px var(--shadow); }
+      .brand-mark { display:grid; place-items:center; width:44px; height:44px; border-radius:14px; background:linear-gradient(135deg, var(--panel-strong), var(--accent2)); box-shadow:0 12px 30px var(--shadow); font-family:var(--serif-ja); font-size:1.25rem; }
       .brand strong { display:block; font-size:1.25rem; letter-spacing:0; }
       .brand span { display:block; color:var(--muted); font-size:.78rem; margin-top:1px; }
       .search { flex:1; max-width:620px; display:grid; grid-template-columns: 1fr auto auto auto; gap:8px; align-items:center; }
@@ -71,11 +72,27 @@
       .hero { min-height:520px; padding:26px; display:grid; grid-template-rows:auto 1fr auto; overflow:hidden; position:relative; }
       .hero:before { content:""; position:absolute; inset:14px; border-radius:8px; border:1px solid rgba(255,255,255,.28); pointer-events:none; }
       .hero-top { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; position:relative; z-index:1; }
-      .location h1 { margin:0; font-size: clamp(2rem, 7vw, 5.8rem); line-height:.92; letter-spacing:0; max-width: 760px; overflow-wrap:anywhere; }
-      .location p { margin:10px 0 0; color:var(--muted); font-weight:650; }
+      .location h1 {
+        margin:0;
+        font-family:var(--serif-ja);
+        font-size:clamp(1.35rem, 4.6vw, 3.5rem);
+        line-height:1.05;
+        font-weight:500;
+        letter-spacing:.03em;
+        max-width:760px;
+        overflow-wrap:anywhere;
+      }
+      .location p { margin:8px 0 0; color:var(--muted); font-family:var(--serif-ja); font-size:.84rem; font-weight:500; letter-spacing:.08em; }
       .updated { text-align:right; color:var(--muted); font-size:.88rem; line-height:1.55; min-width:150px; }
       .temperature { position:relative; z-index:1; align-self:center; display:flex; align-items:flex-end; gap:18px; flex-wrap:wrap; }
-      .temp { font-size: clamp(5.4rem, 18vw, 13.5rem); line-height:.78; font-weight:800; letter-spacing:0; }
+      .temp {
+        font-family:var(--serif-ja);
+        font-size:clamp(3.45rem, 11.5vw, 8.4rem);
+        line-height:.86;
+        font-weight:500;
+        letter-spacing:-.06em;
+        font-variant-numeric:tabular-nums;
+      }
       .cond { margin-bottom:16px; max-width:360px; }
       .cond strong { display:block; font-size: clamp(1.4rem, 3vw, 2.4rem); line-height:1.05; }
       .cond span { display:block; color:var(--muted); margin-top:8px; font-weight:650; }
@@ -110,7 +127,7 @@
         .search { max-width:none; grid-template-columns:1fr auto auto; }
         .search .primary { grid-column:1 / -1; }
         main { grid-template-columns:1fr; }
-        .hero { min-height:500px; padding:18px; }
+        .hero { min-height:470px; padding:18px; }
         .hero-top { flex-direction:column; }
         .updated { text-align:left; min-width:0; }
         .metrics { grid-template-columns:repeat(2, minmax(0, 1fr)); }
@@ -119,8 +136,9 @@
       @media (max-width: 520px) {
         .search { grid-template-columns:1fr 44px 44px; }
         button { padding:0 10px; }
-        .location h1 { font-size: clamp(2.1rem, 17vw, 4.2rem); }
-        .temp { font-size: clamp(5rem, 31vw, 8.3rem); }
+        .location h1 { font-size:clamp(1.45rem, 9.8vw, 2.8rem); }
+        .location p { font-size:.78rem; }
+        .temp { font-size:clamp(3.15rem, 21vw, 5.8rem); }
         .metrics { grid-template-columns:1fr; }
         .metric { min-height:72px; }
       }
@@ -130,7 +148,7 @@
     <div class="sky-art" aria-hidden="true"><div class="orb"></div><div class="veil"></div><div class="rays"></div></div>
     <div class="app">
       <header>
-        <a class="brand" href="./" aria-label="sora"><img alt="" src="data:image/webp;base64,UklGRh4FAABXRUJQVlA4IBIFAACQKwCdASrAAMAAPnk8mkmko6IoorapsRAPCWVudFrdbEF5lpecB/d5JgxHGPjsOTCbJBwejHbHZ6qX2FQb89sGlQOTItA4GAEHZUXRPBxzuDGQpodLdxEgPLFc//8el8LOecWtmPgdSEJ75LOceWpRaMlT2GV16aS9ZixjT7MkKDTrMyL03zlhnK2u7PMhBaltieFBeG/ADxZy4Q2aVjnWlKUcsfAQyKez2P/XtK+R9c6cJ20lcIDwy2JLoi+ueq5iVeDVNdXKO9p7wy5lZfvd16neBAX24y4iHN3Nig5wdz90zsdaVRTPeB19XkqrTFIWdBbYPZoieQnuw0zkOmCQmmjbDGdZGhpC4TOc6PVuMIEeXyDFjDaJFkIZhb762b+/dC0mvdXd3Y7quWXR6fy4iMwNUX1JbmkPpJWRNsYNVLJpYkBJ7GF542SsEonfrTx9CqfXKUvF5pgWyvg0YhHv8dcE8AAA/vtvgHQV5KgMCPeZM9pllwGvHhavosPC3CuWFfJXvRJvgAh4rYCdZaEQm/pJLh9llgwIWLyRwwLPqjbOpR3vC3N4rSeaxtV0epKvH0Iuibwr89MSX7TnJaDXIXeRmCEyEa8JtzMgyGYGiIexcUm/rE/5pQ/I7Vo6qDJY423oBtq8GbR2UwuL5Fjpgm2IulQAHRNkLe82nIGK5DpGUB2D82+6Y9Q3IbyaKMQqLLk1p1HkscvmJ2gktcZPW3vARw3BpFjqwcQDyzDtEBQVpgb1O7w7qMDUn2Akp/9VIvmJgML9NtXmdiyCKm+XQNGgI0Nq8CRnBW3Yb6XMdJFCdMbXRUQk99rGMBnT/dtS7u25hGGbe2QrWw270haXG4x288cJtI5It7B3nVJ8YVMb99IlWmM38SunCmP5OPAU0dC0wSUTVBeLjZk+ZTRfuh8xP3/nnlz3a7zgM36wmZ+XcFSqO1KWKQ0UJsEp1nJCY9ZDpxeP0AgW/GoEMHGBxfR0T89oRgqxcCTdwVvR/2C36pts6HtA34cjgT5EyKOzkUHx+8edBIZM7fEMS4/KM1soXD+JijnvHud6VZLKEMWL2ttUxQDzH2zKouSfTMCCIF9l8nE1IhdLMvF2s0Yh2A29WQF0QJFE+TAdKK8nR3FoJjm8LCtPir3LugR9cPoAkIvriSSe3Wwl/z30uPaTNjav4cviCmJo+k7pLIYVwtF1DNwNhi8u7/HRiqEeCgxpTFNKb8dvUIuw4pgOmxDtx1whjEw78u8DqMojKwOIwZCyyCrZ3xyZTZJiMlXR7EWZzh7R726NojTUbLg5j4XVjln4A5gaSnzZUQVij1DWtdWZIHpZlNLVxp8p05WV8cpVlzTxhOaugC6sSs9EKNebtwYNDmzV9f9SG6Ywi5PKHA8yKq2VZx9JI+Qr/OLjhGnMX5Dlne7dF1Ih7Z6kiCVuwDCN8XQ6R2IBEhd6Drziwai6HvYa9zzzKpDghCMvAy1vmXaDd0buopoDFWcAgdbqLcETW9NZu7626wz7wh7Su1j8caXvCgrM9c3qCtnKzPk1bq5f1oi8YquiCIMC5rbs/4FdFI4htDHIEJjEHr0v2C61t6lK6dTEVTmOjsxvYiXJc3UHOiHK++bgqkcybwK0mOuaK6hOqTJ3RIqqAI4+29NrUa00zyL/hGsdCRRbldvBwLh3tiShjsW1F7D1TYAFSe9vQj+c82XsRdugakkKr6JiZh8LSj9DolCDO03eEcAAAA==" /><div><strong>sora</strong><span>weather</span></div></a>
+        <a class="brand" href="./" aria-label="sora"><span class="brand-mark">空</span><div><strong>sora</strong><span>weather</span></div></a>
         <form class="search" id="searchForm">
           <div class="search-wrap"><input id="query" autocomplete="off" placeholder="都市名を検索" /><div id="suggestions" class="suggestions"></div></div>
           <button type="button" id="geo" title="現在地">⌖</button>
@@ -167,7 +185,7 @@
         ['Tokyo', 35.6762, 139.6503, 'Japan'], ['Osaka', 34.6937, 135.5023, 'Japan'], ['Sapporo', 43.0618, 141.3545, 'Japan'],
         ['Naha', 26.2124, 127.6792, 'Japan'], ['New York', 40.7128, -74.006, 'United States'], ['Paris', 48.8566, 2.3522, 'France']
       ];
-      const state = { place: quickCities[0], unit: 'c', data: null, timer: null, next: 0 };
+      const state = { place: quickCities[0], unit: 'c', data: null, air: null, timer: null, next: 0 };
       const codes = {
         0:['快晴','clear','☀'], 1:['晴れ','clear','☀'], 2:['薄曇り','cloud','◐'], 3:['曇り','cloud','☁'], 45:['霧','fog','≋'], 48:['霧氷','fog','≋'],
         51:['弱い霧雨','rain','·'], 53:['霧雨','rain','·'], 55:['強い霧雨','rain','·'], 61:['小雨','rain','☂'], 63:['雨','rain','☂'], 65:['強い雨','rain','☂'],
@@ -203,13 +221,16 @@
         try {
           const [forecast, air] = await Promise.all([fetch(`${api}?${params}`).then(r => r.json()), fetch(`${airApi}?${airParams}`).then(r => r.ok ? r.json() : null).catch(() => null)]);
           state.data = forecast;
+          state.air = air;
           render(forecast, air);
           state.next = Date.now() + 5 * 60 * 1000;
           tick();
           clearInterval(state.timer);
           state.timer = setInterval(() => Date.now() >= state.next ? load() : tick(), 1000);
         } catch (err) {
-          render(demo(), null);
+          state.data = demo();
+          state.air = null;
+          render(state.data, null);
           $('status').textContent = '通信できないためデモ表示';
         }
       }
@@ -265,7 +286,7 @@
         }, 280);
       });
       $('geo').addEventListener('click', () => navigator.geolocation?.getCurrentPosition(pos => { state.place = ['Current', pos.coords.latitude, pos.coords.longitude, '']; load(); }, () => $('status').textContent = '現在地を取得できません'));
-      $('unit').addEventListener('click', () => { state.unit = state.unit === 'c' ? 'f' : 'c'; $('unit').textContent = state.unit === 'c' ? '°C' : '°F'; if (state.data) render(state.data, null); });
+      $('unit').addEventListener('click', () => { state.unit = state.unit === 'c' ? 'f' : 'c'; $('unit').textContent = state.unit === 'c' ? '°C' : '°F'; if (state.data) render(state.data, state.air); });
       if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./service-worker.js').catch(() => {});
       renderQuick();
       load();
