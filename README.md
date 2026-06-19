@@ -1,13 +1,7 @@
 # sora
 
-A clean animated weather PWA with light-driven visuals. `sora` uses Open-Meteo data, refreshes automatically, and changes the background palette based on the selected area's weather.
+This branch contains the Codex Preview build for `sora` and deploys it to GitHub Pages.
 
 Live site: https://ridyvk.github.io/jijiji/
 
-- Current weather, humidity, wind, pressure, precipitation, UV, and AQI
-- Hourly and 7-day forecasts
-- Location search and current-location support
-- Weather-aware color themes for clear, rain, cloud, snow, fog, storm, and night
-- Generated image app icon with a white base and aqua accent
-
-The app is static and deploys through GitHub Pages.
+The Pages workflow reconstructs the static preview files from verified base64 chunks under `.sora_payload`.
