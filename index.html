@@ -3,65 +3,181 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="sora is a polished light-based animated weather forecast app powered by Open-Meteo."
+    />
     <meta name="theme-color" content="#f7fcff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="sora" />
+    <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png" />
+    <link rel="apple-touch-icon" href="./assets/icon-192.png" />
     <title>sora</title>
-    <style>
-      html, body { min-height: 100%; margin: 0; }
-      body { display: grid; place-items: center; background: #f7fcff; color: #102a36; font-family: Inter, system-ui, sans-serif; }
-      .boot { display: grid; gap: 12px; justify-items: center; }
-      .mark { width: 48px; height: 48px; border-radius: 16px; background: radial-gradient(circle at 35% 30%, #fff 0 30%, #aeeeff 31% 54%, #60cfff 55% 100%); box-shadow: 0 18px 50px rgba(54, 188, 222, .22); }
-      .name { font-size: 18px; font-weight: 700; letter-spacing: 0; }
-    </style>
+    <script type="module" crossorigin src="./assets/index-C8I5DmtA.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-p192XcJw.css">
   </head>
   <body>
-    <div class="boot" id="boot"><div class="mark"></div><div class="name">sora</div></div>
-    <script type="module">
-      const files = {
-        html: ['.sora_payload/index.html.b64.00', '.sora_payload/index.html.b64.01', '.sora_payload/index.html.b64.02'],
-        css: ['.sora_payload/assets/index-CyV1RFfF.css.b64.00', '.sora_payload/assets/index-CyV1RFfF.css.b64.01', '.sora_payload/assets/index-CyV1RFfF.css.b64.02', '.sora_payload/assets/index-CyV1RFfF.css.b64.03', '.sora_payload/assets/index-CyV1RFfF.css.b64.04', '.sora_payload/assets/index-CyV1RFfF.css.b64.05', '.sora_payload/assets/index-CyV1RFfF.css.b64.06', '.sora_payload/assets/index-CyV1RFfF.css.b64.07', '.sora_payload/assets/index-CyV1RFfF.css.b64.08', '.sora_payload/assets/index-CyV1RFfF.css.b64.09', '.sora_payload/assets/index-CyV1RFfF.css.b64.10', '.sora_payload/assets/index-CyV1RFfF.css.b64.11', '.sora_payload/assets/index-CyV1RFfF.css.b64.12', '.sora_payload/assets/index-CyV1RFfF.css.b64.13'],
-        js: ['.sora_payload/assets/index-CZkFYgQA.js.b64.00', '.sora_payload/assets/index-CZkFYgQA.js.b64.01', '.sora_payload/assets/index-CZkFYgQA.js.b64.02', '.sora_payload/assets/index-CZkFYgQA.js.b64.03', '.sora_payload/assets/index-CZkFYgQA.js.b64.04', '.sora_payload/assets/index-CZkFYgQA.js.b64.05', '.sora_payload/assets/index-CZkFYgQA.js.b64.06', '.sora_payload/assets/index-CZkFYgQA.js.b64.07', '.sora_payload/assets/index-CZkFYgQA.js.b64.08', '.sora_payload/assets/index-CZkFYgQA.js.b64.09'],
-        manifest: ['.sora_payload/manifest.webmanifest.b64.00']
-      };
+    <div class="weather-backdrop" aria-hidden="true">
+      <span class="backdrop-orbit orbit-one"></span>
+      <span class="backdrop-orbit orbit-two"></span>
+      <span class="backdrop-ridge ridge-one"></span>
+      <span class="backdrop-ridge ridge-two"></span>
+      <div class="atmosphere-stage page-atmosphere" id="weather-artwork"></div>
+    </div>
 
-      const decoder = new TextDecoder();
-      async function read(paths) {
-        const parts = await Promise.all(paths.map(async (path) => {
-          const response = await fetch(path, { cache: 'no-store' });
-          if (!response.ok) throw new Error(path);
-          return response.text();
-        }));
-        return decode(parts.join(''));
-      }
+    <div class="noise-layer" aria-hidden="true"></div>
+    <div class="app-shell">
+      <header class="topbar" aria-label="アプリ操作">
+        <a class="brand" href="./" aria-label="sora">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <strong>sora</strong>
+            <small>weather</small>
+          </span>
+        </a>
 
-      function decode(base64) {
-        const raw = atob(base64);
-        const bytes = new Uint8Array(raw.length);
-        for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
-        return decoder.decode(bytes);
-      }
+        <form class="search" id="search-form" autocomplete="off">
+          <label class="sr-only" for="city-input">都市名</label>
+          <i data-lucide="search" aria-hidden="true"></i>
+          <input
+            id="city-input"
+            name="city"
+            type="search"
+            inputmode="search"
+            placeholder="都市を検索"
+            value="Tokyo"
+          />
+          <button class="icon-button" type="submit" aria-label="検索" title="検索">
+            <i data-lucide="arrow-right" aria-hidden="true"></i>
+          </button>
+        </form>
 
-      try {
-        const [html, css, js, manifest] = await Promise.all([read(files.html), read(files.css), read(files.js), read(files.manifest)]);
-        const parsed = new DOMParser().parseFromString(html, 'text/html');
-        parsed.querySelector('link[rel="stylesheet"]')?.remove();
-        parsed.querySelector('script[type="module"]')?.remove();
-        const style = parsed.createElement('style');
-        style.textContent = css;
-        parsed.head.appendChild(style);
-        const manifestUrl = URL.createObjectURL(new Blob([manifest], { type: 'application/manifest+json' }));
-        const manifestLink = parsed.querySelector('link[rel="manifest"]');
-        if (manifestLink) manifestLink.href = manifestUrl;
-        const app = document.adoptNode(parsed.documentElement);
-        document.replaceChild(app, document.documentElement);
-        const script = document.createElement('script');
-        script.type = 'module';
-        script.src = URL.createObjectURL(new Blob([js], { type: 'text/javascript' }));
-        document.body.appendChild(script);
-      } catch (error) {
-        document.body.innerHTML = '<div class="boot"><div class="mark"></div><div class="name">sora could not load</div></div>';
-        console.error(error);
-      }
-    </script>
+        <div class="actions">
+          <button class="unit-toggle" id="unit-button" type="button" aria-label="Unit toggle" title="Unit">
+            °C
+          </button>
+          <button class="icon-button" id="location-button" type="button" aria-label="現在地" title="現在地">
+            <i data-lucide="map-pin" aria-hidden="true"></i>
+          </button>
+          <button class="icon-button" id="refresh-button" type="button" aria-label="更新" title="更新">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+          </button>
+        </div>
+      </header>
+
+      <nav class="quick-cities" id="recent-places" aria-label="Recent places" hidden></nav>
+
+      <main class="dashboard">
+        <section class="current-panel glass-panel" aria-labelledby="city-name">
+          <div class="status-row">
+            <span class="live-dot"></span>
+            <span id="data-status">予報を取得中</span>
+          </div>
+          <div class="sync-row" aria-label="更新情報">
+            <span id="last-updated">最終更新 --</span>
+            <span id="next-refresh">次回更新 --</span>
+          </div>
+
+          <div class="current-main">
+            <div>
+              <p class="kicker" id="local-time">--:--</p>
+              <h1 id="city-name">Tokyo</h1>
+              <p class="condition" id="condition-label">Loading sky</p>
+            </div>
+            <div class="weather-glyph" id="weather-glyph" aria-hidden="true">
+              <i data-lucide="sun"></i>
+            </div>
+          </div>
+
+          <div class="temperature-row">
+            <div class="temp-stack">
+              <span class="temperature" id="temperature">--</span>
+              <span class="unit">°C</span>
+            </div>
+            <div class="feels">
+              <span>体感</span>
+              <strong id="feels-like">--°</strong>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric">
+              <i data-lucide="droplets" aria-hidden="true"></i>
+              <span>湿度</span>
+              <strong id="humidity">--%</strong>
+            </article>
+            <article class="metric">
+              <i data-lucide="wind" aria-hidden="true"></i>
+              <span>風</span>
+              <strong id="wind">-- km/h</strong>
+            </article>
+            <article class="metric">
+              <i data-lucide="cloud-rain" aria-hidden="true"></i>
+              <span>降水</span>
+              <strong id="precipitation">-- mm</strong>
+            </article>
+            <article class="metric">
+              <i data-lucide="cloud" aria-hidden="true"></i>
+              <span>雲量</span>
+              <strong id="cloud-cover">--%</strong>
+            </article>
+          </div>
+        </section>
+
+      </main>
+
+      <section class="hourly-band glass-panel" aria-label="時間別予報">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">24時間</p>
+            <h2>Timeline</h2>
+          </div>
+          <span id="sun-times">--</span>
+        </div>
+        <div class="hourly-strip" id="hourly-strip"></div>
+      </section>
+
+      <section class="nowcast-band glass-panel" aria-label="現在の天気推移">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">LIVE</p>
+            <h2>Nowcast</h2>
+          </div>
+          <span id="nowcast-summary">5分ごとに更新</span>
+        </div>
+        <div class="nowcast-content">
+          <div class="nowcast-readout">
+            <span>空の動き</span>
+            <strong id="nowcast-main">--</strong>
+            <p id="nowcast-detail">--</p>
+          </div>
+          <div class="nowcast-strip" id="nowcast-strip"></div>
+        </div>
+      </section>
+
+      <section class="forecast-panel glass-panel" aria-label="週間予報">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">7日間</p>
+            <h2>Forecast</h2>
+          </div>
+          <span id="uv-index">UV --</span>
+        </div>
+        <div class="daily-list" id="daily-list"></div>
+      </section>
+
+      <section class="insights-band glass-panel" aria-label="Today signals">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">TODAY</p>
+            <h2>Signals</h2>
+          </div>
+          <span id="insight-summary">--</span>
+        </div>
+        <div class="insight-grid" id="insight-grid"></div>
+      </section>
+    </div>
   </body>
 </html>
