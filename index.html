@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7fcff" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png" />
+    <title>sora</title>
+    <style>
+      html, body { min-height: 100%; margin: 0; }
+      body { display: grid; place-items: center; background: #f7fcff; color: #102a36; font-family: Inter, system-ui, sans-serif; }
+      .boot { display: grid; gap: 12px; justify-items: center; }
+      .mark { width: 48px; height: 48px; border-radius: 16px; background: radial-gradient(circle at 35% 30%, #fff 0 30%, #aeeeff 31% 54%, #60cfff 55% 100%); box-shadow: 0 18px 50px rgba(54, 188, 222, .22); }
+      .name { font-size: 18px; font-weight: 700; letter-spacing: 0; }
+    </style>
+  </head>
+  <body>
+    <div class="boot" id="boot"><div class="mark"></div><div class="name">sora</div></div>
+    <script type="module">
+      const files = {
+        html: ['.sora_payload/index.html.b64.00', '.sora_payload/index.html.b64.01', '.sora_payload/index.html.b64.02'],
+        css: ['.sora_payload/assets/index-CyV1RFfF.css.b64.00', '.sora_payload/assets/index-CyV1RFfF.css.b64.01', '.sora_payload/assets/index-CyV1RFfF.css.b64.02', '.sora_payload/assets/index-CyV1RFfF.css.b64.03', '.sora_payload/assets/index-CyV1RFfF.css.b64.04', '.sora_payload/assets/index-CyV1RFfF.css.b64.05', '.sora_payload/assets/index-CyV1RFfF.css.b64.06', '.sora_payload/assets/index-CyV1RFfF.css.b64.07', '.sora_payload/assets/index-CyV1RFfF.css.b64.08', '.sora_payload/assets/index-CyV1RFfF.css.b64.09', '.sora_payload/assets/index-CyV1RFfF.css.b64.10', '.sora_payload/assets/index-CyV1RFfF.css.b64.11', '.sora_payload/assets/index-CyV1RFfF.css.b64.12', '.sora_payload/assets/index-CyV1RFfF.css.b64.13'],
+        js: ['.sora_payload/assets/index-CZkFYgQA.js.b64.00', '.sora_payload/assets/index-CZkFYgQA.js.b64.01', '.sora_payload/assets/index-CZkFYgQA.js.b64.02', '.sora_payload/assets/index-CZkFYgQA.js.b64.03', '.sora_payload/assets/index-CZkFYgQA.js.b64.04', '.sora_payload/assets/index-CZkFYgQA.js.b64.05', '.sora_payload/assets/index-CZkFYgQA.js.b64.06', '.sora_payload/assets/index-CZkFYgQA.js.b64.07', '.sora_payload/assets/index-CZkFYgQA.js.b64.08', '.sora_payload/assets/index-CZkFYgQA.js.b64.09'],
+        manifest: ['.sora_payload/manifest.webmanifest.b64.00']
+      };
+
+      const decoder = new TextDecoder();
+      async function read(paths) {
+        const parts = await Promise.all(paths.map(async (path) => {
+          const response = await fetch(path, { cache: 'no-store' });
+          if (!response.ok) throw new Error(path);
+          return response.text();
+        }));
+        return decode(parts.join(''));
+      }
+
+      function decode(base64) {
+        const raw = atob(base64);
+        const bytes = new Uint8Array(raw.length);
+        for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+        return decoder.decode(bytes);
+      }
+
+      try {
+        const [html, css, js, manifest] = await Promise.all([read(files.html), read(files.css), read(files.js), read(files.manifest)]);
+        const parsed = new DOMParser().parseFromString(html, 'text/html');
+        parsed.querySelector('link[rel="stylesheet"]')?.remove();
+        parsed.querySelector('script[type="module"]')?.remove();
+        const style = parsed.createElement('style');
+        style.textContent = css;
+        parsed.head.appendChild(style);
+        const manifestUrl = URL.createObjectURL(new Blob([manifest], { type: 'application/manifest+json' }));
+        const manifestLink = parsed.querySelector('link[rel="manifest"]');
+        if (manifestLink) manifestLink.href = manifestUrl;
+        const app = document.adoptNode(parsed.documentElement);
+        document.replaceChild(app, document.documentElement);
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = URL.createObjectURL(new Blob([js], { type: 'text/javascript' }));
+        document.body.appendChild(script);
+      } catch (error) {
+        document.body.innerHTML = '<div class="boot"><div class="mark"></div><div class="name">sora could not load</div></div>';
+        console.error(error);
+      }
+    </script>
+  </body>
+</html>
