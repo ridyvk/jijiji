@@ -1,0 +1,20 @@
+{
+  "name": "sora",
+  "short_name": "sora",
+  "description": "A clean light-based animated weather forecast app.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fdff",
+  "theme_color": "#f7fcff",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["weather", "utilities", "lifestyle"]
+}
